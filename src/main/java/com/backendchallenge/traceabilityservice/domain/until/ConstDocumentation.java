@@ -24,6 +24,7 @@ public class ConstDocumentation {
     public static final String GET_ORDER_TRACEABILITY_BY_ID_CODE_201 = "Order traceability found successfully";
     public static final String GET_ORDER_TRACEABILITY_BY_ID_CODE_400 = "Invalid request";
     public static final String GET_ORDER_TRACEABILITY_BY_ID_CODE_403 = "Forbidden request";
+    public static final String GET_EFFICIENCY_ORDER = "get efficiency of order";
 
 
     private ConstDocumentation() {

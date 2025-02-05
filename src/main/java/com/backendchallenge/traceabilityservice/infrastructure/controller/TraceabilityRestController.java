@@ -3,6 +3,8 @@ package com.backendchallenge.traceabilityservice.infrastructure.controller;
 import com.backendchallenge.traceabilityservice.application.http.dto.request.AssignEmployeeToOrderTraceabilityRequest;
 import com.backendchallenge.traceabilityservice.application.http.dto.request.OrderTraceabilityRequest;
 import com.backendchallenge.traceabilityservice.application.http.dto.request.UpdateOrderTraceabilityRequest;
+import com.backendchallenge.traceabilityservice.application.http.dto.response.EmployeeEfficiencyResponse;
+import com.backendchallenge.traceabilityservice.application.http.dto.response.OrderEfficiencyResponse;
 import com.backendchallenge.traceabilityservice.application.http.dto.response.OrderTraceabilityResponse;
 import com.backendchallenge.traceabilityservice.application.http.handler.interfaces.IOrderTraceabilityHandler;
 import com.backendchallenge.traceabilityservice.domain.until.ConstDocumentation;
@@ -18,6 +20,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -87,5 +91,17 @@ public class TraceabilityRestController {
     @PostMapping(ConstRoute.GET_ORDER_TRACEABILITY_BY_ID)
     public ResponseEntity<OrderTraceabilityResponse> getOrderTraceabilityById(@Valid @RequestParam Long id) {
         return ResponseEntity.ok(orderTraceabilityHandler.getOrderTraceabilityById(id));
+    }
+
+    //@Operation(summary = ConstDocumentation.GET_EFFICIENCY_ORDER)
+
+    @GetMapping(ConstRoute.GET_EFFICIENCY_ORDERS)
+    public ResponseEntity<List<OrderEfficiencyResponse>>getOrdersEfficiency(){
+        return ResponseEntity.ok(orderTraceabilityHandler.getOrderEfficiency());
+    }
+
+    @GetMapping(ConstRoute.GET_EFFICIENCY_EMPLOYEES)
+    public ResponseEntity<List<EmployeeEfficiencyResponse>>getEmployeesEfficiency(){
+        return ResponseEntity.ok(orderTraceabilityHandler.gerEmployeesEfficiency());
     }
 }
