@@ -9,6 +9,10 @@ public class ConstTest {
     public static final String ROLE = "ROLE_USER";
     public static final String USERNAME = "username";
     public static final String EMPTY = "";
+    public static final String START = "start";
+    public static final String END = "end";
+    public static final int FIVE = 5;
+    public static final int TEN = 10;
 
     private ConstTest() {
     }

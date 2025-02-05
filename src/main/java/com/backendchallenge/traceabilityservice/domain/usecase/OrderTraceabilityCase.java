@@ -59,12 +59,12 @@ public class OrderTraceabilityCase implements IOrderTraceabilityServicePort {
                         return null;
                     }
                     LocalDateTime start = statusChanges.get(ConstValidation.ZERO).getDate();
-                    LocalDateTime end = statusChanges.get(statusChanges.size() -ConstValidation.ONE).getDate();
+                    LocalDateTime end = statusChanges.get(statusChanges.size() - ConstValidation.ONE).getDate();
                     long processingTime = Duration.between(start, end).toMinutes();
                     return new OrderEfficiency(order.getId(), order.getIdEmployee(), processingTime);
                 })
                 .filter(Objects::nonNull)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @Override
@@ -80,6 +80,7 @@ public class OrderTraceabilityCase implements IOrderTraceabilityServicePort {
         return employeeEfficiency.entrySet().stream()
                 .map(entry -> new EmployeeEfficiency(entry.getKey(), entry.getValue()))
                 .sorted(Comparator.comparingDouble(EmployeeEfficiency::getAverageTime))
-                .collect(Collectors.toList());
+                .toList();
     }
+
 }
