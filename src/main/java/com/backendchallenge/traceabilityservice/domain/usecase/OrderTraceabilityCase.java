@@ -28,8 +28,8 @@ public class OrderTraceabilityCase implements IOrderTraceabilityServicePort {
     }
 
     @Override
-    public void updateOrderTraceability(Long id, String status, LocalDateTime date) {
-        Order order = orderTraceabilityPort.getOrderByOrderId(id);
+    public void updateOrderTraceability(Long idOrder, String status, LocalDateTime date) {
+        Order order = orderTraceabilityPort.getOrderByOrderId(idOrder);
         List<StatusChange> statusChanges = order.getStatusChanges();
         statusChanges.add(new StatusChange(date, status));
         order.setStatusChanges(statusChanges);
