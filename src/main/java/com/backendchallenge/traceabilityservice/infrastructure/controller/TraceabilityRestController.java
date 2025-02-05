@@ -93,13 +93,31 @@ public class TraceabilityRestController {
         return ResponseEntity.ok(orderTraceabilityHandler.getOrderTraceabilityById(id));
     }
 
-    //@Operation(summary = ConstDocumentation.GET_EFFICIENCY_ORDER)
-
+    @Operation(summary = ConstDocumentation.GET_EFFICIENCY_ORDER)
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = ConstDocumentation.CODE_200,
+                    description = ConstDocumentation.GET_EFFICIENCY_ORDER_CODE_200),
+            @ApiResponse(responseCode = ConstDocumentation.CODE_400,
+                    description = ConstDocumentation.GET_EFFICIENCY_ORDER_CODE_400),
+            @ApiResponse(responseCode = ConstDocumentation.CODE_403,
+                    description = ConstDocumentation.GET_EFFICIENCY_ORDER_CODE_403),
+    })
+    @PreAuthorize(ConstJwt.HAS_AUTHORITY_OWNER)
     @GetMapping(ConstRoute.GET_EFFICIENCY_ORDERS)
     public ResponseEntity<List<OrderEfficiencyResponse>>getOrdersEfficiency(){
         return ResponseEntity.ok(orderTraceabilityHandler.getOrderEfficiency());
     }
 
+    @Operation(summary = ConstDocumentation.GET_EFFICIENCY_EMPLOYEE)
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = ConstDocumentation.CODE_200,
+                    description = ConstDocumentation.GET_EFFICIENCY_EMPLOYEE_CODE_200),
+            @ApiResponse(responseCode = ConstDocumentation.CODE_400,
+                    description = ConstDocumentation.GET_EFFICIENCY_EMPLOYEE_CODE_400),
+            @ApiResponse(responseCode = ConstDocumentation.CODE_403,
+                    description = ConstDocumentation.GET_EFFICIENCY_EMPLOYEE_CODE_403),
+    })
+    @PreAuthorize(ConstJwt.HAS_AUTHORITY_OWNER)
     @GetMapping(ConstRoute.GET_EFFICIENCY_EMPLOYEES)
     public ResponseEntity<List<EmployeeEfficiencyResponse>>getEmployeesEfficiency(){
         return ResponseEntity.ok(orderTraceabilityHandler.gerEmployeesEfficiency());

@@ -25,6 +25,14 @@ public class ConstDocumentation {
     public static final String GET_ORDER_TRACEABILITY_BY_ID_CODE_400 = "Invalid request";
     public static final String GET_ORDER_TRACEABILITY_BY_ID_CODE_403 = "Forbidden request";
     public static final String GET_EFFICIENCY_ORDER = "get efficiency of order";
+    public static final String CODE_200 = "200";
+    public static final String GET_EFFICIENCY_ORDER_CODE_200 = "Efficiency of order found successfully";
+    public static final String GET_EFFICIENCY_ORDER_CODE_400 = "Invalid request";
+    public static final String GET_EFFICIENCY_ORDER_CODE_403 = "Forbidden request";
+    public static final String GET_EFFICIENCY_EMPLOYEE = "get efficiency of employee";
+    public static final String GET_EFFICIENCY_EMPLOYEE_CODE_200 = "Efficiency of employee found successfully";
+    public static final String GET_EFFICIENCY_EMPLOYEE_CODE_400 = "Invalid request";
+    public static final String GET_EFFICIENCY_EMPLOYEE_CODE_403 = "Forbidden request";
 
 
     private ConstDocumentation() {
