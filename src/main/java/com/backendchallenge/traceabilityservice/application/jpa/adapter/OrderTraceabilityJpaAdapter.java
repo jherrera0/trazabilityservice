@@ -7,6 +7,8 @@ import com.backendchallenge.traceabilityservice.domain.model.Order;
 import com.backendchallenge.traceabilityservice.domain.spi.IOrderTraceabilityPersistencePort;
 import lombok.RequiredArgsConstructor;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 public class OrderTraceabilityJpaAdapter implements IOrderTraceabilityPersistencePort {
     private final IOrderEntityMapper orderEntityMapper;
@@ -24,5 +26,10 @@ public class OrderTraceabilityJpaAdapter implements IOrderTraceabilityPersistenc
     public Order getOrderByOrderId(Long idOrder) {
         String id = idOrder.toString();
         return orderTraceabilityRepository.findById(id);
+    }
+
+    @Override
+    public List<Order> getAllOrders() {
+        return orderEntityMapper.toDomainList(orderTraceabilityRepository.findAll());
     }
 }
