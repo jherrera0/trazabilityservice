@@ -1,6 +1,8 @@
 package com.backendchallenge.traceabilityservice.domain.usecase;
 
+import com.backendchallenge.traceabilityservice.domain.model.EmployeeEfficiency;
 import com.backendchallenge.traceabilityservice.domain.model.Order;
+import com.backendchallenge.traceabilityservice.domain.model.OrderEfficiency;
 import com.backendchallenge.traceabilityservice.domain.model.StatusChange;
 import com.backendchallenge.traceabilityservice.domain.spi.IOrderTraceabilityPersistencePort;
 import com.backendchallenge.traceabilityservice.domain.until.ConstTest;
@@ -82,5 +84,105 @@ class OrderTraceabilityCaseTest {
         Order result = orderTraceabilityCase.getOrderTraceability(idOrder);
 
         assertEquals(order, result);
+    }
+    @Test
+    void getOrdersEfficiency_noOrders_returnsEmptyList() {
+        when(orderTraceabilityPort.getAllOrders()).thenReturn(new ArrayList<>());
+
+        List<OrderEfficiency> result = orderTraceabilityCase.getOrdersEfficiency();
+
+        assertEquals(ConstValidation.ZERO, result.size());
+    }
+
+    @Test
+    void getEmployeesEfficiency_noOrders_returnsEmptyList() {
+        when(orderTraceabilityPort.getAllOrders()).thenReturn(new ArrayList<>());
+
+        List<EmployeeEfficiency> result = orderTraceabilityCase.getEmployeesEfficiency();
+
+        assertEquals(ConstValidation.ZERO, result.size());
+    }
+
+    @Test
+    void getOrdersEfficiency_validOrders_returnsOrderEfficiencyList() {
+        List<Order> orders = new ArrayList<>();
+        LocalDateTime now = LocalDateTime.now();
+        Order order = new Order();
+        List<StatusChange> statusChanges = new ArrayList<>();
+        statusChanges
+                .add(new StatusChange(now.minusMinutes(ConstTest.TEN),
+                        ConstTest.STATUS_TEST+ConstTest.START));
+        statusChanges.add(new StatusChange(now.minusMinutes(ConstTest.FIVE), ConstTest.STATUS_TEST));
+        statusChanges.add(new StatusChange(now, ConstTest.STATUS_TEST+ConstTest.END));
+        order.setStatusChanges(statusChanges);
+        order.setStatusChanges(statusChanges);
+        orders.add(order);
+        when(orderTraceabilityPort.getAllOrders()).thenReturn(orders);
+
+        List<OrderEfficiency> result = orderTraceabilityCase.getOrdersEfficiency();
+
+        assertEquals(ConstValidation.ONE, result.size());
+        assertEquals(ConstTest.TEN, result.get(ConstValidation.ZERO).getProcessingTimeMinutes());
+    }
+
+    @Test
+    void getEmployeesEfficiency_validOrders_returnsEmployeeEfficiencyList() {
+        List<Order> orders = new ArrayList<>();
+        LocalDateTime now = LocalDateTime.now();
+        Order order = new Order();
+        order.setIdEmployee(ConstTest.ID_TEST);
+        List<StatusChange> statusChanges = new ArrayList<>();
+        statusChanges
+                .add(new StatusChange(now.minusMinutes(ConstTest.TEN),
+                        ConstTest.STATUS_TEST+ConstTest.START));
+        statusChanges.add(new StatusChange(now.minusMinutes(ConstTest.FIVE), ConstTest.STATUS_TEST));
+        statusChanges.add(new StatusChange(now, ConstTest.STATUS_TEST+ConstTest.END));
+        order.setStatusChanges(statusChanges);
+        orders.add(order);
+        when(orderTraceabilityPort.getAllOrders()).thenReturn(orders);
+
+        List<EmployeeEfficiency> result = orderTraceabilityCase.getEmployeesEfficiency();
+
+        assertEquals(ConstValidation.ONE, result.size());
+        assertEquals(ConstTest.ID_TEST, result.get(ConstValidation.ZERO).getEmployeeId());
+        assertEquals(ConstTest.TEN, result.get(ConstValidation.ZERO).getAverageTime());
+    }
+
+    @Test
+    void getOrdersEfficiency_validOrders_returnsEmpty() {
+        List<Order> orders = new ArrayList<>();
+        LocalDateTime now = LocalDateTime.now();
+        Order order = new Order();
+        List<StatusChange> statusChanges = new ArrayList<>();
+        statusChanges
+                .add(new StatusChange(now.minusMinutes(ConstTest.TEN),
+                        ConstTest.STATUS_TEST+ConstTest.START));
+        statusChanges.add(new StatusChange(now, ConstTest.STATUS_TEST+ConstTest.END));
+        order.setStatusChanges(statusChanges);
+        order.setStatusChanges(statusChanges);
+        orders.add(order);
+        when(orderTraceabilityPort.getAllOrders()).thenReturn(orders);
+
+        List<OrderEfficiency> result = orderTraceabilityCase.getOrdersEfficiency();
+
+        assertEquals(ConstValidation.ONE, result.size());
+        assertEquals(ConstTest.TEN, result.get(ConstValidation.ZERO).getProcessingTimeMinutes());
+    }
+    @Test
+    void getOrdersEfficiency_statusChangesNullOrLessThanTwo_returnsEmptyList() {
+        List<Order> orders = new ArrayList<>();
+        Order orderWithNullStatusChanges = new Order();
+        orderWithNullStatusChanges.setStatusChanges(null);
+        Order orderWithOneStatusChange = new Order();
+        List<StatusChange> oneStatusChange = new ArrayList<>();
+        oneStatusChange.add(new StatusChange(LocalDateTime.now(), ConstTest.STATUS_TEST));
+        orderWithOneStatusChange.setStatusChanges(oneStatusChange);
+        orders.add(orderWithNullStatusChanges);
+        orders.add(orderWithOneStatusChange);
+        when(orderTraceabilityPort.getAllOrders()).thenReturn(orders);
+
+        List<OrderEfficiency> result = orderTraceabilityCase.getOrdersEfficiency();
+
+        assertEquals(ConstValidation.ZERO, result.size());
     }
 }

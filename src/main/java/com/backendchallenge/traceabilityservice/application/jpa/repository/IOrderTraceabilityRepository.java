@@ -7,4 +7,5 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 public interface IOrderTraceabilityRepository extends MongoRepository<OrderEntity,Long> {
 
     Order findById(String id);
+
 }

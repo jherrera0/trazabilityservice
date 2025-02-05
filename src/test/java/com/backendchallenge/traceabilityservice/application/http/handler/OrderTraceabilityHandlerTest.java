@@ -3,7 +3,11 @@ package com.backendchallenge.traceabilityservice.application.http.handler;
 import com.backendchallenge.traceabilityservice.application.http.dto.request.AssignEmployeeToOrderTraceabilityRequest;
 import com.backendchallenge.traceabilityservice.application.http.dto.request.OrderTraceabilityRequest;
 import com.backendchallenge.traceabilityservice.application.http.dto.request.UpdateOrderTraceabilityRequest;
+import com.backendchallenge.traceabilityservice.application.http.dto.response.EmployeeEfficiencyResponse;
+import com.backendchallenge.traceabilityservice.application.http.dto.response.OrderEfficiencyResponse;
 import com.backendchallenge.traceabilityservice.application.http.dto.response.OrderTraceabilityResponse;
+import com.backendchallenge.traceabilityservice.application.http.mapper.IEmployeesEfficiencyResponseMapper;
+import com.backendchallenge.traceabilityservice.application.http.mapper.IOrderEfficiencyResponseMapper;
 import com.backendchallenge.traceabilityservice.domain.api.IOrderTraceabilityServicePort;
 import com.backendchallenge.traceabilityservice.application.http.mapper.IOrderTraceabilityMapper;
 import com.backendchallenge.traceabilityservice.domain.model.Order;
@@ -16,6 +20,8 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
@@ -27,6 +33,12 @@ class OrderTraceabilityHandlerTest {
 
     @Mock
     private IOrderTraceabilityMapper orderTraceabilityMapper;
+
+    @Mock
+    private IOrderEfficiencyResponseMapper orderEfficiencyResponseMapper;
+
+    @Mock
+    private IEmployeesEfficiencyResponseMapper employeesEfficiencyResponseMapper;
 
     @InjectMocks
     private OrderTraceabilityHandler orderTraceabilityHandler;
@@ -83,5 +95,26 @@ class OrderTraceabilityHandlerTest {
         OrderTraceabilityResponse result = orderTraceabilityHandler.getOrderTraceabilityById(id);
 
         assertEquals(response, result);
+    }
+    @Test
+    void getOrderEfficiency_returnsResponseList() {
+        List<OrderEfficiencyResponse> responseList = new ArrayList<>();
+        when(orderTraceabilityServicePort.getOrdersEfficiency()).thenReturn(new ArrayList<>());
+        when(orderEfficiencyResponseMapper.toResponseList(anyList())).thenReturn(responseList);
+
+        List<OrderEfficiencyResponse> result = orderTraceabilityHandler.getOrderEfficiency();
+
+        assertEquals(responseList, result);
+    }
+
+    @Test
+    void getEmployeesEfficiency_returnsResponseList() {
+        List<EmployeeEfficiencyResponse> responseList = new ArrayList<>();
+        when(orderTraceabilityServicePort.getEmployeesEfficiency()).thenReturn(new ArrayList<>());
+        when(employeesEfficiencyResponseMapper.toResponseList(anyList())).thenReturn(responseList);
+
+        List<EmployeeEfficiencyResponse> result = orderTraceabilityHandler.gerEmployeesEfficiency();
+
+        assertEquals(responseList, result);
     }
 }

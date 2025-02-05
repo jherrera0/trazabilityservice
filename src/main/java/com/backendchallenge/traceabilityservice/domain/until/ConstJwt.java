@@ -10,6 +10,7 @@ public class ConstJwt {
     public static final String SPLITERSTRING = " ";
     public static final String HAS_AUTHORITY_CLIENT = "hasAuthority('CLIENT')";
     public static final String PERMIT_ALL = "permitAll()";
+    public static final String HAS_AUTHORITY_OWNER = "hasAuthority('OWNER')";
 
     private ConstJwt() {
     }

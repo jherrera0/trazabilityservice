@@ -13,6 +13,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
@@ -59,5 +60,18 @@ class OrderTraceabilityJpaAdapterTest {
         Order result = orderTraceabilityJpaAdapter.getOrderByOrderId(idOrder);
 
         assertEquals(order, result);
+    }
+    @Test
+    void getAllOrders_returnsOrderList() {
+        List<OrderEntity> orderEntities = new ArrayList<>();
+        orderEntities.add(new OrderEntity());
+        List<Order> orders = new ArrayList<>();
+        orders.add(new Order());
+        when(orderTraceabilityRepository.findAll()).thenReturn(orderEntities);
+        when(orderEntityMapper.toDomainList(orderEntities)).thenReturn(orders);
+
+        List<Order> result = orderTraceabilityJpaAdapter.getAllOrders();
+
+        assertEquals(orders, result);
     }
 }

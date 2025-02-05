@@ -3,6 +3,8 @@ package com.backendchallenge.traceabilityservice.infrastructure.controller;
 import com.backendchallenge.traceabilityservice.application.http.dto.request.AssignEmployeeToOrderTraceabilityRequest;
 import com.backendchallenge.traceabilityservice.application.http.dto.request.OrderTraceabilityRequest;
 import com.backendchallenge.traceabilityservice.application.http.dto.request.UpdateOrderTraceabilityRequest;
+import com.backendchallenge.traceabilityservice.application.http.dto.response.EmployeeEfficiencyResponse;
+import com.backendchallenge.traceabilityservice.application.http.dto.response.OrderEfficiencyResponse;
 import com.backendchallenge.traceabilityservice.application.http.dto.response.OrderTraceabilityResponse;
 import com.backendchallenge.traceabilityservice.application.http.handler.interfaces.IOrderTraceabilityHandler;
 import com.backendchallenge.traceabilityservice.domain.until.ConstTest;
@@ -14,6 +16,9 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.test.context.support.WithMockUser;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.doNothing;
@@ -82,5 +87,28 @@ class TraceabilityRestControllerTest {
         ResponseEntity<Void> response = traceabilityRestController.updateOrderTraceability(request);
 
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
+    }
+    @Test
+    @WithMockUser(authorities = "OWNER")
+    void getOrdersEfficiency_returnsOk() {
+        List<OrderEfficiencyResponse> responseMock = new ArrayList<>();
+        when(orderTraceabilityHandler.getOrderEfficiency()).thenReturn(responseMock);
+
+        ResponseEntity<List<OrderEfficiencyResponse>> response = traceabilityRestController.getOrdersEfficiency();
+
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(responseMock, response.getBody());
+    }
+
+    @Test
+    @WithMockUser(authorities = "OWNER")
+    void getEmployeesEfficiency_returnsOk() {
+        List<EmployeeEfficiencyResponse> responseMock = new ArrayList<>();
+        when(orderTraceabilityHandler.gerEmployeesEfficiency()).thenReturn(responseMock);
+
+        ResponseEntity<List<EmployeeEfficiencyResponse>> response = traceabilityRestController.getEmployeesEfficiency();
+
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(responseMock, response.getBody());
     }
 }
