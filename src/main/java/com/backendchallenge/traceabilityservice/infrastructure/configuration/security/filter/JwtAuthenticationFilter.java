@@ -1,4 +1,4 @@
-package com.backendchallenge.traceabilityservice.infrastructure.security.filter;
+package com.backendchallenge.traceabilityservice.infrastructure.configuration.security.filter;
 
 import com.backendchallenge.traceabilityservice.domain.until.ConstJwt;
 import jakarta.servlet.FilterChain;

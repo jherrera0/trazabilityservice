@@ -1,4 +1,4 @@
-package com.backendchallenge.traceabilityservice.infrastructure.security;
+package com.backendchallenge.traceabilityservice.infrastructure.configuration.security;
 
 
 import com.backendchallenge.traceabilityservice.application.jwt.JwtService;

@@ -1,4 +1,4 @@
-package com.backendchallenge.traceabilityservice.infrastructure.security;
+package com.backendchallenge.traceabilityservice.infrastructure.configuration.security;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;

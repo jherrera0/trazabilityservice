@@ -1,6 +1,6 @@
-package com.backendchallenge.traceabilityservice.infrastructure.security;
+package com.backendchallenge.traceabilityservice.infrastructure.configuration.security;
 
-import com.backendchallenge.traceabilityservice.infrastructure.security.filter.JwtAuthenticationFilter;
+import com.backendchallenge.traceabilityservice.infrastructure.configuration.security.filter.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
