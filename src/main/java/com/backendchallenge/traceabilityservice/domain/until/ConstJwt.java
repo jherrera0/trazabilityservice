@@ -9,6 +9,7 @@ public class ConstJwt {
     public static final String HAS_AUTHORITY_EMPLOYEE = "hasAuthority('EMPLOYEE')";
     public static final String SPLITERSTRING = " ";
     public static final String HAS_AUTHORITY_CLIENT = "hasAuthority('CLIENT')";
+    public static final String PERMIT_ALL = "permitAll()";
 
     private ConstJwt() {
     }

@@ -37,7 +37,7 @@ public class TraceabilityRestController {
             @ApiResponse(responseCode = ConstDocumentation.CODE_403,
                     description = ConstDocumentation.CREATE_ORDER_TRACEABILITY_CODE_403),
     })
-    @PreAuthorize(ConstJwt.HAS_AUTHORITY_EMPLOYEE)
+    @PreAuthorize(ConstJwt.HAS_AUTHORITY_CLIENT)
     @PostMapping(ConstRoute.CREATE_ORDER_TRACEABILITY)
     public ResponseEntity<Void> createOrderTraceability(@Valid @RequestBody OrderTraceabilityRequest request) {
         orderTraceabilityHandler.createOrderTraceability(request);
@@ -53,7 +53,7 @@ public class TraceabilityRestController {
             @ApiResponse(responseCode = ConstDocumentation.CODE_403,
                     description = ConstDocumentation.UPDATE_ORDER_TRACEABILITY_CODE_403),
     })
-    @PreAuthorize(ConstJwt.HAS_AUTHORITY_EMPLOYEE)
+    @PreAuthorize(ConstJwt.PERMIT_ALL)
     @PostMapping(ConstRoute.UPDATE_ORDER_TRACEABILITY)
     public ResponseEntity<Void> updateOrderTraceability(@Valid @RequestBody UpdateOrderTraceabilityRequest request) {
         orderTraceabilityHandler.updateOrderTraceability(request);

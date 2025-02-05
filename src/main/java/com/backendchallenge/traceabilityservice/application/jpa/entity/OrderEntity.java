@@ -15,7 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 public class OrderEntity {
     @Id
-    private Long id;
+    private String id;
     private Long idClient;
     private Long idEmployee;
     private Long idRestaurant;

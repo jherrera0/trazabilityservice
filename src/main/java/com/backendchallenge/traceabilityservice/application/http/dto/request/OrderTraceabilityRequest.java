@@ -19,8 +19,6 @@ public class OrderTraceabilityRequest {
     @Positive
     @NotNull
     private Long idClient;
-    @Positive
-    @NotNull
     private Long idEmployee;
     @Positive
     @NotNull

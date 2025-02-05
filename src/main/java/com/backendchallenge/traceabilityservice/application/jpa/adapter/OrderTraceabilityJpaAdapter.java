@@ -16,19 +16,13 @@ public class OrderTraceabilityJpaAdapter implements IOrderTraceabilityPersistenc
     @Override
     public void createOrderTraceability(Order order) {
         OrderEntity orderEntity = orderEntityMapper.toEntity(order);
-        orderTraceabilityRepository.save(orderEntity);
-    }
-
-    @Override
-    public void updateOrderTraceability(Order order) {
-        OrderEntity orderEntity = orderEntityMapper.toEntity(order);
+        orderEntity.setId(order.getId().toString());
         orderTraceabilityRepository.save(orderEntity);
     }
 
     @Override
     public Order getOrderByOrderId(Long idOrder) {
-        return orderTraceabilityRepository.findById(idOrder)
-                .map(orderEntityMapper::toDomain)
-                .orElse(null);
+        String id = idOrder.toString();
+        return orderTraceabilityRepository.findById(id);
     }
 }

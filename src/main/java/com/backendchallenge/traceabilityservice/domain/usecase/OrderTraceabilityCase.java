@@ -24,7 +24,7 @@ public class OrderTraceabilityCase implements IOrderTraceabilityServicePort {
     public void assignEmployeeToOrder(Long idOrder, Long idEmployee) {
         Order order = orderTraceabilityPort.getOrderByOrderId(idOrder);
         order.setIdEmployee(idEmployee);
-        orderTraceabilityPort.updateOrderTraceability(order);
+        orderTraceabilityPort.createOrderTraceability(order);
     }
 
     @Override
@@ -33,7 +33,7 @@ public class OrderTraceabilityCase implements IOrderTraceabilityServicePort {
         List<StatusChange> statusChanges = order.getStatusChanges();
         statusChanges.add(new StatusChange(date, status));
         order.setStatusChanges(statusChanges);
-        orderTraceabilityPort.updateOrderTraceability(order);
+        orderTraceabilityPort.createOrderTraceability(order);
     }
 
     @Override

@@ -4,6 +4,5 @@ import com.backendchallenge.traceabilityservice.domain.model.Order;
 
 public interface IOrderTraceabilityPersistencePort {
     void createOrderTraceability(Order order);
-    void updateOrderTraceability(Order order);
     Order getOrderByOrderId(Long idOrder);
 }
