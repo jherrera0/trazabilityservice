@@ -1,12 +1,19 @@
 package com.backendchallenge.traceabilityservice.domain.usecase;
 
 import com.backendchallenge.traceabilityservice.domain.api.IOrderTraceabilityServicePort;
+import com.backendchallenge.traceabilityservice.domain.model.EmployeeEfficiency;
 import com.backendchallenge.traceabilityservice.domain.model.Order;
+import com.backendchallenge.traceabilityservice.domain.model.OrderEfficiency;
 import com.backendchallenge.traceabilityservice.domain.model.StatusChange;
 import com.backendchallenge.traceabilityservice.domain.spi.IOrderTraceabilityPersistencePort;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class OrderTraceabilityCase implements IOrderTraceabilityServicePort {
     private final IOrderTraceabilityPersistencePort orderTraceabilityPort;
@@ -39,5 +46,39 @@ public class OrderTraceabilityCase implements IOrderTraceabilityServicePort {
     @Override
     public Order getOrderTraceability(Long idOrder) {
         return orderTraceabilityPort.getOrderByOrderId(idOrder);
+    }
+
+    @Override
+    public List<OrderEfficiency> getOrdersEfficiency() {
+        List<Order> orders = orderTraceabilityPort.getAllOrders();
+        return orders.stream()
+                .map(order -> {
+                    List<StatusChange> statusChanges = order.getStatusChanges();
+                    if (statusChanges == null || statusChanges.size() < 2) {
+                        return null;
+                    }
+                    LocalDateTime start = statusChanges.get(0).getDate();
+                    LocalDateTime end = statusChanges.get(statusChanges.size() - 1).getDate();
+                    long processingTime = Duration.between(start, end).toMinutes();
+                    return new OrderEfficiency(order.getId(), order.getIdEmployee(), processingTime);
+                })
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<EmployeeEfficiency> getEmployeesEfficiency() {
+        List<OrderEfficiency> ordersEfficiency = getOrdersEfficiency();
+
+        Map<Long, Double> employeeEfficiency = ordersEfficiency.stream()
+                .collect(Collectors.groupingBy(
+                        OrderEfficiency::getEmployeeId,
+                        Collectors.averagingLong(OrderEfficiency::getProcessingTimeMinutes)
+                ));
+
+        return employeeEfficiency.entrySet().stream()
+                .map(entry -> new EmployeeEfficiency(entry.getKey(), entry.getValue()))
+                .sorted(Comparator.comparingDouble(EmployeeEfficiency::getAverageTime))
+                .collect(Collectors.toList());
     }
 }
