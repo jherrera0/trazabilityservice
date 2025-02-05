@@ -3,6 +3,7 @@ package com.backendchallenge.traceabilityservice.infrastructure.controller;
 import com.backendchallenge.traceabilityservice.application.http.dto.request.AssignEmployeeToOrderTraceabilityRequest;
 import com.backendchallenge.traceabilityservice.application.http.dto.request.OrderTraceabilityRequest;
 import com.backendchallenge.traceabilityservice.application.http.dto.request.UpdateOrderTraceabilityRequest;
+import com.backendchallenge.traceabilityservice.application.http.dto.response.OrderTraceabilityResponse;
 import com.backendchallenge.traceabilityservice.application.http.handler.interfaces.IOrderTraceabilityHandler;
 import com.backendchallenge.traceabilityservice.domain.until.ConstDocumentation;
 import com.backendchallenge.traceabilityservice.domain.until.ConstJwt;
@@ -16,10 +17,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RestController
@@ -87,8 +85,7 @@ public class TraceabilityRestController {
     })
     @PreAuthorize(ConstJwt.HAS_AUTHORITY_CLIENT)
     @PostMapping(ConstRoute.GET_ORDER_TRACEABILITY_BY_ID)
-    public ResponseEntity<Void> getOrderTraceabilityById(@Valid @RequestBody Long id) {
-        orderTraceabilityHandler.getOrderTraceabilityById(id);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+    public ResponseEntity<OrderTraceabilityResponse> getOrderTraceabilityById(@Valid @RequestParam Long id) {
+        return ResponseEntity.ok(orderTraceabilityHandler.getOrderTraceabilityById(id));
     }
 }
