@@ -6,6 +6,7 @@ import com.backendchallenge.traceabilityservice.domain.model.Order;
 import com.backendchallenge.traceabilityservice.domain.model.OrderEfficiency;
 import com.backendchallenge.traceabilityservice.domain.model.StatusChange;
 import com.backendchallenge.traceabilityservice.domain.spi.IOrderTraceabilityPersistencePort;
+import com.backendchallenge.traceabilityservice.domain.until.ConstValidation;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -54,11 +55,11 @@ public class OrderTraceabilityCase implements IOrderTraceabilityServicePort {
         return orders.stream()
                 .map(order -> {
                     List<StatusChange> statusChanges = order.getStatusChanges();
-                    if (statusChanges == null || statusChanges.size() < 2) {
+                    if (statusChanges == null || statusChanges.size() < ConstValidation.TWO) {
                         return null;
                     }
-                    LocalDateTime start = statusChanges.get(0).getDate();
-                    LocalDateTime end = statusChanges.get(statusChanges.size() - 1).getDate();
+                    LocalDateTime start = statusChanges.get(ConstValidation.ZERO).getDate();
+                    LocalDateTime end = statusChanges.get(statusChanges.size() -ConstValidation.ONE).getDate();
                     long processingTime = Duration.between(start, end).toMinutes();
                     return new OrderEfficiency(order.getId(), order.getIdEmployee(), processingTime);
                 })
