@@ -10,4 +10,5 @@ import org.mapstruct.ReportingPolicy;
         unmappedSourcePolicy = ReportingPolicy.IGNORE)
 public interface IOrderEntityMapper {
     OrderEntity toEntity(Order order);
+    Order toDomain(OrderEntity orderEntity);
 }

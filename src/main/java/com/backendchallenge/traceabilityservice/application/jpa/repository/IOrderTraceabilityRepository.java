@@ -4,4 +4,5 @@ import com.backendchallenge.traceabilityservice.application.jpa.entity.OrderEnti
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 public interface IOrderTraceabilityRepository extends MongoRepository<OrderEntity,Long> {
+
 }
