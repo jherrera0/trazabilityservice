@@ -1,4 +1,4 @@
-package com.backendchallenge.trazabilityservice.domain.until;
+package com.backendchallenge.traceabilityservice.domain.until;
 
 public class ConstJwt {
     public static final String BEARER = "Bearer";

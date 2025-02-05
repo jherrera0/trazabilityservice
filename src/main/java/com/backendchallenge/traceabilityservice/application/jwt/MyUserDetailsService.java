@@ -1,7 +1,7 @@
-package com.backendchallenge.trazabilityservice.application.jwt;
+package com.backendchallenge.traceabilityservice.application.jwt;
 
 
-import com.backendchallenge.trazabilityservice.domain.until.ConstExceptions;
+import com.backendchallenge.traceabilityservice.domain.until.ConstExceptions;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

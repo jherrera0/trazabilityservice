@@ -1,8 +1,8 @@
-package com.backendchallenge.trazabilityservice.infrastructure.security;
+package com.backendchallenge.traceabilityservice.infrastructure.security;
 
 
-import com.backendchallenge.trazabilityservice.application.jwt.JwtService;
-import com.backendchallenge.trazabilityservice.application.jwt.MyUserDetailsService;
+import com.backendchallenge.traceabilityservice.application.jwt.JwtService;
+import com.backendchallenge.traceabilityservice.application.jwt.MyUserDetailsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

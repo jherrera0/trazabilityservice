@@ -1,6 +1,6 @@
-package com.backendchallenge.trazabilityservice.infrastructure.security.filter;
+package com.backendchallenge.traceabilityservice.infrastructure.security.filter;
 
-import com.backendchallenge.trazabilityservice.domain.until.ConstJwt;
+import com.backendchallenge.traceabilityservice.domain.until.ConstJwt;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

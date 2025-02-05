@@ -1,7 +1,7 @@
-package com.backendchallenge.trazabilityservice.application.jwt;
+package com.backendchallenge.traceabilityservice.application.jwt;
 
 
-import com.backendchallenge.trazabilityservice.domain.until.ConstJwt;
+import com.backendchallenge.traceabilityservice.domain.until.ConstJwt;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;

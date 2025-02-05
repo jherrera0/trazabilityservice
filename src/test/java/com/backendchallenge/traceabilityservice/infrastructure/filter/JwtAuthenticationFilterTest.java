@@ -1,10 +1,10 @@
-package com.backendchallenge.trazabilityservice.infrastructure.filter;
+package com.backendchallenge.traceabilityservice.infrastructure.filter;
 
 
-import com.backendchallenge.trazabilityservice.domain.until.ConstExceptions;
-import com.backendchallenge.trazabilityservice.domain.until.ConstJwt;
-import com.backendchallenge.trazabilityservice.domain.until.ConstTest;
-import com.backendchallenge.trazabilityservice.infrastructure.security.filter.JwtAuthenticationFilter;
+import com.backendchallenge.traceabilityservice.domain.until.ConstExceptions;
+import com.backendchallenge.traceabilityservice.domain.until.ConstJwt;
+import com.backendchallenge.traceabilityservice.domain.until.ConstTest;
+import com.backendchallenge.traceabilityservice.infrastructure.security.filter.JwtAuthenticationFilter;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

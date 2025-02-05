@@ -1,13 +1,13 @@
-package com.backendchallenge.trazabilityservice;
+package com.backendchallenge.traceabilityservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class TrazabilityserviceApplication {
+public class TraceabilityServiceApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(TrazabilityserviceApplication.class, args);
+		SpringApplication.run(TraceabilityServiceApplication.class, args);
 	}
 
 }

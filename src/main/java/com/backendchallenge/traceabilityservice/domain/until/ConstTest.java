@@ -1,4 +1,4 @@
-package com.backendchallenge.trazabilityservice.domain.until;
+package com.backendchallenge.traceabilityservice.domain.until;
 
 public class ConstTest {
     public static final String VALID_TOKEN = "valid.token.here";
